@@ -277,9 +277,9 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
   CGFloat scrollTop = self.bounds.origin.y + self.contentInset.top;
   // If the RefreshControl is refreshing, remove it's height so sticky headers are
   // positioned properly when scrolling down while refreshing.
-  if (self.refreshControl != nil && self.refreshControl.refreshing) {
-    scrollTop -= self.refreshControl.frame.size.height;
-  }
+//  if (self.refreshControl != nil && self.refreshControl.refreshing) {
+//    scrollTop -= self.refreshControl.frame.size.height;
+//  }
 
   // Find the section headers that need to be docked
   __block UIView *previousHeader = nil;
@@ -369,11 +369,11 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
 
 - (void)setRefreshControl:(RCTRefreshControl *)refreshControl
 {
-  if (_refreshControl) {
-    [_refreshControl removeFromSuperview];
+  if (refreshControl) {
+    [refreshControl removeFromSuperview];
   }
-  _refreshControl = refreshControl;
-  [self addSubview:_refreshControl];
+  refreshControl = refreshControl;
+  [self addSubview:refreshControl];
 }
 
 @end
@@ -446,10 +446,10 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
 
 - (NSArray<UIView *> *)reactSubviews
 {
-  if (_contentView && _scrollView.refreshControl) {
-    return @[_contentView, _scrollView.refreshControl];
-  }
-  return _contentView ? @[_contentView] : @[];
+    if (_contentView && _scrollView.refreshControl) {
+        return @[_contentView, _scrollView.refreshControl];
+    }
+    return _contentView ? @[_contentView] : @[];
 }
 
 - (BOOL)centerContent
@@ -496,10 +496,10 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
   _scrollView.contentOffset = originalOffset;
 
   // Adjust the refresh control frame if the scrollview layout changes.
-  RCTRefreshControl *refreshControl = _scrollView.refreshControl;
-  if (refreshControl && refreshControl.refreshing) {
-    refreshControl.frame = (CGRect){_scrollView.contentOffset, {_scrollView.frame.size.width, refreshControl.frame.size.height}};
-  }
+//  RCTRefreshControl *refreshControl = _scrollView.refreshControl;
+//  if (refreshControl && refreshControl.refreshing) {
+//    refreshControl.frame = (CGRect){_scrollView.contentOffset, {_scrollView.frame.size.width, refreshControl.frame.size.height}};
+//  }
 
   [self updateClippedSubviews];
 }
